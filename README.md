@@ -41,10 +41,10 @@ Make Zsh your default shell:
 chsh -s /bin/zsh
 ```
 
-Download and run the [install script](https://gist.github.com/stanislavHamara/73b3019dc9c057decbb2cb54cb00e88c). Alternatively, run the following:
+Download and run the [install script](https://gist.github.com/stanislavHamara/0b59c210e1f3f796d39c19b9113e2d33). Alternatively, run the following:
 
 ```shell
-sh -c "$(curl -s https://gist.githubusercontent.com/stanislavHamara/73b3019dc9c057decbb2cb54cb00e88c/raw/dotfiles.sh)" sh <github-username>
+sh -c "$(curl -s https://gist.github.com/stanislavHamara/0b59c210e1f3f796d39c19b9113e2d33/raw/dotfiles.sh)" sh <github-username>
 ```
 
 Restart your terminal. Alternatively, run the following:
