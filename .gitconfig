@@ -3,6 +3,7 @@
     shove = push --force-with-lease
     amend = commit --amend --no-edit
     fixup = commit --fixup
+    co = checkout
 [color]
     ui = true
 [color "diff"]
