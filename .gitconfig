@@ -32,3 +32,13 @@
     autosquash = true
 [init]
     defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Stanislav Hamara
+	email = stanislav.hamara@docker.com
+[push]
+	autoSetupRemote = true
