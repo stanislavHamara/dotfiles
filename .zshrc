@@ -16,7 +16,7 @@ export VISUAL=vim
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 # Set aliases
-alias gs="git status"
+alias gs="git status -sb"
 alias gd="git diff"
 alias gds="git diff --staged"
 alias gg="git graph"
