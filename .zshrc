@@ -25,10 +25,11 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cdr="cd $(git rev-parse --show-toplevel)"
 
 # Docker specific aliases
-alias yp="yarn prettier.check"
+alias yl="yarn run lint --fix"
 alias a='export AWS_PROFILE=$(aws configure list-profiles | fzf)'
 alias k="kubectl"
 alias d="docker"
+alias h="docker harmonia"
 alias kn="kubens"
 alias ar='infra-cli aws init -y'
 alias al='infra-cli aws login -y'
@@ -46,3 +47,13 @@ export NVM_DIR="$HOME/.nvm"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
