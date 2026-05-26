@@ -3,3 +3,9 @@
 
 # OSX custom folder attributes
 .DS_Store
+
+# Warp sum ups
+WARP.md
+
+# Cursor workspace metadata
+.cursor/

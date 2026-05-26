@@ -24,8 +24,6 @@
     path = ~/.gitconfig.unix
 [includeIf "gitdir/i:/home/"]
     path = ~/.gitconfig.unix
-[commit]
-    gpgsign = false
 [pull]
     ff = only
 [rebase]
@@ -40,5 +38,15 @@
 [user]
 	name = Stanislav Hamara
 	email = stanislav.hamara@docker.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuES3tbFVGkntduroC0zialS8wdlqrwT3UTTLxYA5ky
 [push]
 	autoSetupRemote = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = /Users/stanislavhamara/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true

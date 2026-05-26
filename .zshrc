@@ -1,12 +1,14 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="tercete"
-plugins=(git nvm z wsl vi-mode ssh-agent gpg-agent)
+plugins=(git z wsl vi-mode ssh-agent gpg-agent)
 source "$ZSH/oh-my-zsh.sh"
 
 # Load local binaries
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="$HOME/source/cagent/bin:$PATH"
 
 # Use Vim as the default editor
 export EDITOR=vim
@@ -21,8 +23,10 @@ alias gd="git diff"
 alias gds="git diff --staged"
 alias gg="git graph"
 alias gf="git fetch --prune"
+alias gpc="gh pr checkout"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cdr="cd $(git rev-parse --show-toplevel)"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # Docker specific aliases
 alias yl="yarn run lint --fix"
@@ -39,12 +43,27 @@ alias aws-sso-login='infra-cli aws login'
 alias aws-sso-temp-creds='eval $(aws configure export-credentials --format env)'
 alias eks='infra-cli aws configEks'
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+alias p='pnpm'
+alias wipedd='. ~/source/wipedd.sh'
 
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+lazy_load_nvm() {
+  unset -f node npm npx nvm
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+}
+node() { lazy_load_nvm; node "$@"; }
+npm()  { lazy_load_nvm; npm "$@"; }
+npx()  { lazy_load_nvm; npx "$@"; }
+nvm()  { lazy_load_nvm; nvm "$@"; }
 
+# 1Password CLI secrets — skip when no TTY or non-interactive; requires `op` on PATH.
+if [[ -o interactive ]] && [[ -t 0 ]] && [[ -t 1 ]] && command -v op >/dev/null 2>&1; then
+  export GITHUB_TOKEN=$(op read "op://Employee/github_token/password")
+  export HOMEBREW_GITHUB_API_TOKEN=$(op read "op://Employee/github_token/password")
+  export GITHUB_PERSONAL_ACCESS_TOKEN=$(op read "op://Employee/github_personal_token/password")
+  export ANTHROPIC_API_KEY=$(op read "op://Employee/anthropic_api_key/password")
+  export OPENAI_API_KEY=$(op read "op://Employee/openai_api_key/password")
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -54,6 +73,8 @@ export NVM_DIR="$HOME/.nvm"
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+export GOPRIVATE=github.com/docker
 
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+export PATH="/usr/local/codeql:$PATH"
